@@ -4,12 +4,12 @@
 
 To run project:
 
-_ At Frontend:
+- At Frontend:
 
 + Go to frontend folder
 + cd/elearning && yarn && yarn start
 
-_ At Backend:
+- At Backend:
 
 + Open project ElearningProject
 + Install Spring Dev 3 (If not install yet)
