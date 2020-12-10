@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layout/lecturer/default">
+
+<head>
+<title>MY COURSE</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<div class="container-fluid">
+				<ol class="breadcrumb bg-white mb-0 py-2">
+					<li class="breadcrumb-item"><a href="#"><i
+							class="fa fa-home mr-1"></i>Home</a></li>
+
+				</ol>
+			</div>
+		</nav>
+		<section class="course-banner"
+			style="height: 100%; background: url('https://webdeasy.de/wp-content/uploads/2019/07/equalizer.gif')">
+			<div class="container">
+
+
+				<img alt="" th:src="${account.avatar}"
+					style="position: relative; width: 300px; height: 100px; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; margin-top: 50px;">
+				<h1 class="text-center" th:text="${'Lecturer ' + account.fullname}"></h1>
+				<div style="height: 95px"></div>
+			</div>
+
+		</section>
+		<!-- BEGIN CONTENT -->
+		<section class="mt-5">
+			<div class="container"
+				style="background: #f7f8fa; border-radius: 15px; padding-bottom: 20px;">
+
+
+
+				<div style="padding-bottom: 20px; color: transparent;">AAA</div>
+
+				<div class="row">
+					<div class="col-md-3" th:each="item : ${courses}">
+						<a th:href="@{/lecturer/course/detail/{id}(id=${item.id})}"
+							class="my-course-item"> <img width="240" height="140"
+							th:src="${item.image}" alt="">
+
+							<h6 class="my-course-title text-center text-uppercase"
+								th:text="${item.title}"></h6>
+							<div class="text-center seller-label">
+								<p th:if="${item.discount != 0 }"
+									th:text="'Sale ' + ${item.discount} + '%'"
+									style="background-color: #ff0000; color: #ffffff; border-radius: 100%; padding: 20px;"
+									class="btn btn-sm btn-round py-1 font-weight-bold">10%</p>
+
+							</div>
+							<div class="text-center seller-label">
+								<p th:if="${item.discount == 0 }"
+									th:text="'Sale ' + ${item.discount} + '%'"
+									style="background-color: transparent; color: transparent; border-radius: 100%; padding: 20px;"
+									class="btn btn-sm btn-round py-1 font-weight-bold">10%</p>
+							</div>
+							<div class="my-course-desc" th:text="${item.description}">Java
+								Python Android and C# Expert Developer - 467K+ students The
+								Complete Guide (incl Hooks, React Router, Redux)</div>
+
+							<div class="my-course-author">
+								<h6>
+									<div class="">
+										<small><h5
+												style="padding-right: 15px;text-align: center; font-style: italic; font-weight: bold; color: #b7aab4;"
+												th:text="${item.author}">LONGGGGG</h5></small>
+									</div>
+									<div th:if="${item.discount > 0}">
+										<div style="font-weight: bold;" class="font-weight-bold">
+											<h4 th:if="${item.price != 0 }"
+												style="background-color: transparent; color: #000; font-size: 22px;"
+												class="text-bold text-right">
+												<del th:text="${item.price + '$'}"></del>
+											</h4>
+
+											<h4 th:if="${item.price == 0 }"
+												style="color: #ffa51e; border-radius: 100%; padding: 20px;"
+												class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Free</h4>
+
+
+										</div>
+										<div class="font-weight-bold">
+											<h4 class="font-weight-bold" style="color: #630f0b;"
+												th:text="${item.promotionPrice}+'$'">55$</h4>
+										</div>
+									</div>
+									<div th:if="${item.discount == 0}">
+										<div style="font-weight: bold;" class="font-weight-bold">
+
+											<h4 th:if="${item.price != 0 }" th:text="${item.price + '$'}"
+												style="color: #630f0b;" class="text-bold"></h4>
+											<h4 th:if="${item.price == 0 }"
+												style="background-color: #403434; color: #ffeb00; border-radius: 100%; padding: 20px;"
+												class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Free</h4>
+
+
+
+										</div>
+								</h6>
+								<p class="text-center text-info">
+									<i th:text="${' '+item.totalMembers + ' students enrolled'}"
+										class="fa fa-user-o mr-2"></i>
+								</p>
+
+							</div>
+							
+						</a>
+						<div style="width:90% ;justify-item: center; text-align: center; ">
+						
+						<a 
+							style="border-radius: 30px; color: #ffffff; height: 30px; font-weight: bold;"
+							class="btn btn-sm btn-danger"
+							th:href="@{/lecturer/course/delete/{id}(id=${item.id})}">DELETE</a>
+						</div>
+						 
+
+					</div>
+
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>

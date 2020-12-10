@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="icon"
+	href="https://st2.depositphotos.com/3926905/6684/v/950/depositphotos_66840447-stock-illustration-e-learning-icon-web.jpg"
+	type="image/x-icon">
+<title>Title</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<th:block th:replace="/fragments/user/styles" />
+
+
+</head>
+<body>
+	<th:block th:replace="/fragments/user/header :: header" />
+	<th:block layout:fragment="content" />
+	<th:block th:replace="/fragments/user/footer" />
+	<th:block th:replace="/fragments/user/scripts" />
+</html>
