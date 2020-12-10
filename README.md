@@ -11,6 +11,6 @@ _ At Frontend:
 
 _ At Backend:
 
-+ Open folder project ElearningProject
++ Open project ElearningProject
 + Install Spring Dev 3 (If not install yet)
 + Run by Spring Boot
