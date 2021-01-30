@@ -14,38 +14,25 @@ export default function () {
                 <span className="pcoded-mtext">Dashboard</span>
               </a>
             </li>
+           
+           
             <li className="">
-              <a href="./category-index.html">
-                <span className="pcoded-micon">
-                  <i className="feather icon-layers"></i>
-                </span>
-                <span className="pcoded-mtext">Danh mục</span>
-              </a>
+              <Link to="/admin/course">
+                  <span className="pcoded-micon">
+                    <i className="feather icon-layers"></i>
+                  </span>
+                  <span className="pcoded-mtext">Course Management</span>
+              </Link>
             </li>
             <li className="">
-              <a href="./course-list.html">
-                <span className="pcoded-micon">
-                  <i className="feather icon-layers"></i>
-                </span>
-                <span className="pcoded-mtext">Khóa học</span>
-              </a>
+              <Link to="/admin/video">
+                  <span className="pcoded-micon">
+                    <i className="feather icon-layers"></i>
+                  </span>
+                  <span className="pcoded-mtext">Video Management</span>
+              </Link>
             </li>
-            <li className="">
-              <a href="./video-list.html">
-                <span className="pcoded-micon">
-                  <i className="feather icon-layers"></i>
-                </span>
-                <span className="pcoded-mtext">Video</span>
-              </a>
-            </li>
-            <li className="">
-              <a href="./target-list.html">
-                <span className="pcoded-micon">
-                  <i className="feather icon-layers"></i>
-                </span>
-                <span className="pcoded-mtext">Mục tiêu</span>
-              </a>
-            </li>
+            
 
             <li className="">
               <Link to="/admin/user">

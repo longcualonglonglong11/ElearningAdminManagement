@@ -7,12 +7,12 @@ import React, {
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  selectAllRole,
-  fetchRoles,
-  addARole,
-  editARole,
-  deteleARole,
-} from "./RoleListSlice";
+  selectAllVideo,
+  fetchVideos,
+  addAVideo,
+  editAVideo,
+  deteleAVideo,
+} from "./VideoListSlice";
 import SockJsClient from "react-stomp";
 
 import ReactDOM from "react-dom";
@@ -25,19 +25,19 @@ var clientRef;
 export default function () {
   const dispatch = useDispatch();
   const btnAddRef = useRef();
-  const formRoleRef = useRef();
-  const roles = useSelector(selectAllRole);
+  const formVideoRef = useRef();
+  const videos = useSelector(selectAllVideo);
   const btnAddContainer = "btn-add-container";
   const formAddContainer = "form-add-container";
   useEffect(() => {
-    console.log("Main Role fetch");
+    console.log("Main Video fetch");
     ReactDOM.render(
-      <AddRoleButton resultMsg="" />,
+      <AddVideoButton resultMsg="" />,
       document.getElementById(btnAddContainer)
     );
-    dispatch(fetchRoles());
+    dispatch(fetchVideos());
   }, []);
-  const RoleForm = ({ resultMsg, colorResultMsg }) => {
+  const VideoForm = ({ resultMsg, colorResultMsg }) => {
     const nameInputRef = useRef();
     const mesessageRef = useRef();
     const [name, setName] = useState("");
@@ -53,7 +53,7 @@ export default function () {
       nameInputRef.current.focus();
     }, []);
     return (
-      <div ref={formRoleRef} class="pcoded-content">
+      <div ref={formVideoRef} class="pcoded-content">
         {console.log("form render")}
         <BigThing />
 
@@ -65,7 +65,7 @@ export default function () {
                 <div class="col-sm-12">
                   <div class="card">
                     <div class="card-header">
-                      <h2 class="text-uppercase text-center">Add new role</h2>
+                      <h2 class="text-uppercase text-center">Add new video</h2>
                     </div>
                     <div class="card-block">
                       <form action="" method="post">
@@ -98,7 +98,7 @@ export default function () {
                               <button
                                 type="button"
                                 onClick={() => {
-                                  handleAddRole(senderId, name, description);
+                                  handleAddVideo(senderId, name, description);
                                   resetForm();
                                 }}
                                 class="btn btn-primary m-b-0"
@@ -112,7 +112,7 @@ export default function () {
                                 onClick={() => {
                                   // ReactDOM.render(<></>, document.querySelector("#hohoho"));
                                   ReactDOM.render(
-                                    <AddRoleButton resultMsg="" />,
+                                    <AddVideoButton resultMsg="" />,
                                     document.querySelector(
                                       `#${btnAddContainer}`
                                     )
@@ -128,7 +128,7 @@ export default function () {
                                 Cancel
                               </a>
                               <a
-                                class="ml-5 role-msg"
+                                class="ml-5 video-msg"
                                 ref={mesessageRef}
                                 style={{
                                   color: colorResultMsg,
@@ -166,91 +166,101 @@ export default function () {
 
   const token =
     "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB5YWhvby5jb20iLCJpYXQiOjE2MDc0MTUyMzYsImV4cCI6MTYxNjA1NTIzNn0.eMohZIX9PyAaCq_TtSM3P8jCS30mg_W4yV_e6vXYd6zZyyCruRfHNfwjJ3zTuXgdSk76qd9Cfw62b9rIFihH2A";
-  const handleAddRole = (id, name, description) => {
+  const handleAddVideo = (id, name, description) => {
     clientRef.sendMessage(
-      "/app/add-role",
+      "/app/add-video",
 
       JSON.stringify({
         senderId: id,
-        role: { name, description },
+        video: { name, description },
       })
     );
   };
-  const handleEditRole = ({  roleId, name, description }) => {
-    console.log("AAAAAAAAaa: ", senderId)
+  const handleEditVideo = ({ videoId, name, description }) => {
+    console.log("AAAAAAAAaa: ", senderId);
     clientRef.sendMessage(
-      "/app/edit-role",
+      "/app/edit-video",
 
       JSON.stringify({
         senderId: senderId,
-        role: { id: roleId, name, description },
+        video: { id: videoId, name, description },
       })
     );
   };
-  const handleDelRole = (id) => {
+  const handleDelVideo = (id) => {
     console.log(clientRef);
-    clientRef.sendMessage(`/app/delete-role/${id}`);
+    clientRef.sendMessage(`/app/delete-video/${id}`);
   };
 
-  const RoleTable = ({ roles }) => {
+  const VideoTable = ({ videos }) => {
     const remakeEditRow = ({
       name,
       description,
-      rowRoleRef,
+      rowVideoRef,
       index,
-      roleId,
+      videoId,
     }) => {
-      const curRowContainer = rowRoleRef[index].current.querySelectorAll("td");
+      const curRowContainer = rowVideoRef[index].current.querySelectorAll("td");
       const nameRow = curRowContainer[0];
       const descriptionRow = curRowContainer[1];
 
       curRowContainer[2].innerHTML = `<a class="btn btn-sm btn-info btn-round py-1 font-weight-bold text-white">Edit</a><a class="btn btn-sm btn-danger btn-round py-1 font-weight-bold text-white">Delete</a>`;
       const curBtnContainer = curRowContainer[2].querySelectorAll("a");
       curBtnContainer[0].addEventListener("click", () =>
-        createEditRoleSegment({ index, roleId })
+        createEditVideoSegment({ index, videoId })
       );
-      curBtnContainer[1].addEventListener("click", () => handleDelRole(roleId));
+      curBtnContainer[1].addEventListener("click", () =>
+        handleDelVideo(videoId)
+      );
       nameRow.innerHTML = name;
       descriptionRow.innerHTML = description;
       console.log(nameRow);
 
       console.log(curRowContainer);
     };
-    const createEditRoleSegment = ({ index, roleId }) => {
-      // rowRoleRef[index].current.innerHTML = '<input value="ye"/>'
-      const curRowContainer = rowRoleRef[index].current.querySelectorAll("td");
+    const createEditVideoSegment = ({ index, videoId }) => {
+      // rowVideoRef[index].current.innerHTML = '<input value="ye"/>'
+      const curRowContainer = rowVideoRef[index].current.querySelectorAll("td");
       const nameRow = curRowContainer[0];
       const descriptionRow = curRowContainer[1];
 
       const backupName = nameRow.innerText;
       const backupDescription = descriptionRow.innerText;
-      let backupData = { name: backupName, description: backupDescription, rowRoleRef, index, roleId };
+      let backupData = {
+        name: backupName,
+        description: backupDescription,
+        rowVideoRef,
+        index,
+        videoId,
+      };
 
       curRowContainer[2].innerHTML = `<a class="btn btn-sm btn-info btn-round py-1 font-weight-bold text-white">${"Save"}</a><a class="btn btn-sm btn-danger btn-round py-1 font-weight-bold text-white">Cancle</a>`;
       const curBtnContainer = curRowContainer[2].querySelectorAll("a");
-      curBtnContainer[0].addEventListener("click", () =>
-        handleEditRole({
-          roleId,
-          name: nameRow.querySelector("input").value,
-          description: descriptionRow.querySelector("input").value,
-        })
+      curBtnContainer[0].addEventListener(
+        "click",
+        () =>
+          handleEditVideo({
+            videoId,
+            name: nameRow.querySelector("input").value,
+            description: descriptionRow.querySelector("input").value,
+          })
         // ,
         // remakeEditRow({
         //   name: nameRow.querySelector("input").value,
         //   description: descriptionRow.querySelector("input").value,
-        //   rowRoleRef,
+        //   rowVideoRef,
         //   index,
-        //   roleId
+        //   videoId
         // })
       );
       // curBtnContainer[0].addEventListener("click", () =>
       //   remakeEditRow({
-          
+
       //     name: nameRow.querySelector("input").value,
       //     description: descriptionRow.querySelector("input").value,
-      //     rowRoleRef,
+      //     rowVideoRef,
       //     index,
-      //     roleId
+      //     videoId
       //   })
       // );
       curBtnContainer[1].addEventListener("click", () =>
@@ -259,45 +269,52 @@ export default function () {
       nameRow.innerHTML = `<input value='${backupName}'/>`;
       descriptionRow.innerHTML = `<input value='${backupDescription}'/>`;
 
-      // rowRoleRef[index].current.style.color = 'red'
+      // rowVideoRef[index].current.style.color = 'red'
     };
-    var rowRoleRef = [];
-    for (let i = 0; i < roles.length; i++) {
-      rowRoleRef[i] = React.createRef();
-    }
-    console.log(rowRoleRef);
+    var rowVideoRef = [];
+    if (videos)
+      for (let i = 0; i < videos.length; i++) {
+        rowVideoRef[i] = React.createRef();
+      }
+    console.log(rowVideoRef);
 
     return (
       <div className="card-block table-border-style">
-        {console.log("role table render")}
+        {console.log("video table render")}
         <div className="table-responsive">
           <table className="table table-bordered">
             <thead>
               <tr>
                 <th>No</th>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Title</th>
+                <th>URL</th>
+                <th>Length</th>
+                <th>Course Name</th>
+
                 <th>Option</th>
               </tr>
             </thead>
-            <tbody id="tbodyRole">
-              {roles.map((role, index) => (
-                <tr ref={rowRoleRef[index]} key={role.id} class="text-left">
+            <tbody id="tbodyVideo">
+              {videos.map((video, index) => (
+                <tr ref={rowVideoRef[index]} key={video.id} class="text-left">
                   <th>{index + 1}</th>
-                  <td> {role.name}</td>
-                  <td>{role.description}</td>
+                  <td> {video.title}</td>
+                  <td>{video.url}</td>
+                  <td>{video.length}</td>
+
+                  <td>{video.courseName}</td>
                   <td>
                     <a
                       className="btn btn-sm btn-info btn-round py-1 font-weight-bold text-white"
                       onClick={() => {
-                        createEditRoleSegment({index, roleId: role.id });
+                        createEditVideoSegment({ index, videoId: video.id });
                       }}
                     >
                       Edit
                     </a>
                     <a
                       onClick={() => {
-                        handleDelRole(role.id);
+                        handleDelVideo(video.id);
                       }}
                       className="btn btn-sm btn-danger btn-round py-1 font-weight-bold text-white"
                     >
@@ -312,22 +329,22 @@ export default function () {
       </div>
     );
   };
-  const AddRoleButton = ({ resultMsg, colorResultMsg }) => {
+  const AddVideoButton = ({ resultMsg, colorResultMsg }) => {
     useEffect(() => {}, []);
     return (
       <>
-        {console.log("btn add new role render")}
+        {console.log("btn add new video render")}
         <a
           ref={btnAddRef}
           onClick={() => {
-            console.log(formRoleRef);
-            // formRoleRef.current.remove();
+            console.log(formVideoRef);
+            // formVideoRef.current.remove();
             ReactDOM.unmountComponentAtNode(
               document.getElementById(btnAddContainer)
             );
 
             ReactDOM.render(
-              <RoleForm
+              <VideoForm
                 resultMsg={resultMsg}
                 colorResultMsg={colorResultMsg}
               />,
@@ -336,19 +353,19 @@ export default function () {
           }}
           className="btn btn-sm btn-primary float-left text-white"
         >
-          ADD NEW ROLE
+          ADD NEW VIDEO
         </a>
       </>
     );
   };
   const handleResultMessage = (message, color) => {
     ReactDOM.render(
-      <RoleForm resultMsg={message} colorResultMsg={color} />,
+      <VideoForm resultMsg={message} colorResultMsg={color} />,
       document.getElementById(formAddContainer)
     );
   };
   return (
-    <div className="Role-list">
+    <div className="Video-list">
       <div id={formAddContainer}></div>
       <div className="pcoded-content ">
         <div className="pcoded-inner-content">
@@ -365,7 +382,7 @@ export default function () {
                         </Link>
                       </li>
                       <li className="breadcrumb-item">
-                        <a>Role List</a>
+                        <a>Video List</a>
                       </li>
                     </ul>
                   </div>
@@ -374,11 +391,11 @@ export default function () {
                 <div className="col-sm-12">
                   <div className="card px-3">
                     <div className="card-header px-0 pb-2">
-                      <h2 className="text-uppercase text-center">Role List</h2>
+                      <h2 className="text-uppercase text-center">Video List</h2>
                       <div id={btnAddContainer}></div>
                     </div>
 
-                    <RoleTable roles={roles} />
+                    <VideoTable videos={videos} />
                   </div>
                 </div>
               </div>
@@ -393,9 +410,9 @@ export default function () {
         }}
         cc="cc"
         topics={[
-          "/topic/role-topic/add",
-          "/topic/role-topic/delete",
-          "/topic/role-topic/edit",
+          "/topic/video-topic/add",
+          "/topic/video-topic/delete",
+          "/topic/video-topic/edit",
         ]}
         onConnect={() => {
           console.log("Connected!!!");
@@ -411,14 +428,14 @@ export default function () {
           const failureColor = "red";
           const succeedState = "success";
           const errorState = "error";
-          const actionAdd = "role/add";
-          const actionDelete = "role/del";
-          const actionEdit = "role/edit";
+          const actionAdd = "video/add";
+          const actionDelete = "video/del";
+          const actionEdit = "video/edit";
 
           switch (msg.type) {
             case actionAdd:
               if (msg.status === succeedState) {
-                dispatch(addARole(msg.role));
+                dispatch(addAVideo(msg.video));
                 if (msg.senderId === senderId)
                   handleResultMessage(successeMsg, successColor);
               } else if (
@@ -430,16 +447,15 @@ export default function () {
               break;
             case actionDelete:
               if (msg.status === succeedState) {
-                dispatch(deteleARole(msg.role.id));
+                dispatch(deteleAVideo(msg.video.id));
               } else if (msg.status === errorState) {
                 console.log(msg.error);
               }
               break;
             case actionEdit:
-              console.log(msg)
+              console.log(msg);
               if (msg.status === succeedState) {
-                
-                dispatch(editARole(msg.role));
+                dispatch(editAVideo(msg.video));
               } else if (msg.status === errorState) {
                 console.log(msg.error);
               }
