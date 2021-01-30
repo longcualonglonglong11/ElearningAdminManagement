@@ -2,8 +2,8 @@
 
 Introduce:
 
-+ Front-end: React, Redux
-+ Back-end: Spring Boot
+- Front-end: React, Redux
+- Back-end: Spring Boot
 
 + COURSE MANAGEMENT PAGE:
 ![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978708/tmp/Screenshot_from_2021-01-30_10-31-10_oesap3.png)
