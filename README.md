@@ -4,7 +4,7 @@ Introduce:
 
 + COURSE MANAGEMENT PAGE:
 ![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978708/tmp/Screenshot_from_2021-01-30_10-31-10_oesap3.png)
-USER MANAGEMENT PAGE:
++ USER MANAGEMENT PAGE:
 ![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978707/tmp/Screenshot_from_2021-01-30_10-31-16_fwwjyk.png)
 
 + ROLE MANAGEMENT PAGE:
