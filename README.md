@@ -2,13 +2,18 @@
 
 Introduce:
 
-HOMEPAGE:
-![alt text](https://drive.google.com/file/d/1eG-0TfekdCRP4hRaQQCUafXfBTTZx30D/view?usp=sharing)
-ADD NEW ROLE:
-![alt text](https://drive.google.com/file/d/1eG-0TfekdCRP4hRaQQCUafXfBTTZx30D/view?usp=sharing)
-EDIT ROLE:
++ COURSE MANAGEMENT PAGE:
+![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978708/tmp/Screenshot_from_2021-01-30_10-31-10_oesap3.png)
+USER MANAGEMENT PAGE:
+![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978707/tmp/Screenshot_from_2021-01-30_10-31-16_fwwjyk.png)
 
-![alt text](https://scontent.fsgn5-1.fna.fbcdn.net/v/t1.15752-9/129795206_183094416804474_1648667385490301142_n.png?_nc_cat=101&ccb=2&_nc_sid=ae9488&_nc_ohc=ropc7t-myycAX_Cx5I5&_nc_ht=scontent.fsgn5-1.fna&oh=d22b3e03c9e7c7f54a06b2dc3fd33f58&oe=5FF7AAF5)
++ ROLE MANAGEMENT PAGE:
+![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978707/tmp/Screenshot_from_2021-01-30_10-31-20_ckffte.png)
+
++ ADD ROLE SECTION:
+![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978707/tmp/Screenshot_from_2021-01-30_10-31-22_pioqe4.png) 
++ EDIT ROLE SECTION:
+![alt text](https://res.cloudinary.com/dyqx4xje5/image/upload/v1611978707/tmp/Screenshot_from_2021-01-30_10-31-40_rn7mvp.png)
 
 To run project:
 
